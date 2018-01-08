@@ -277,16 +277,13 @@ def game_loop():
                 # Clicked on object
                 if (object_maximum_x >= mouse_x >= object_x) and (object_maximum_y >= mouse_y >= object_y):
 
+                    # Deacrease object size
                     if object_height_minimum > 40:
 
                         object_width_maximum -= 2
                         object_height_maximum -= 2
                         object_width_minimum -= 2
                         object_height_minimum -= 2
-
-                    print("Width MAX: {} Width MIN: {} \n Heigth MAX: {} Heigth MIN: {}"
-                          .format(object_width_maximum, object_width_minimum,
-                                  object_height_maximum, object_height_minimum))
 
                     object_x = random.randrange(coordinate_min_x, coordinate_max_x)
                     object_y = random.randrange(coordinate_y_min, coordinate_y_max)
