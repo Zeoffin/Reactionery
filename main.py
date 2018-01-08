@@ -14,7 +14,7 @@ display_y = 600
 
 display = pygame.display.set_mode((display_x, display_y))
 
-pygame.display.set_caption("Reactionery!")
+pygame.display.set_caption("Reactionery - The Game")
 
 clock = pygame.time.Clock()
 
