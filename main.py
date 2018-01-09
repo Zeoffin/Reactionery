@@ -95,12 +95,12 @@ def game_menu():
             if event.type == pygame.QUIT:
                 exit_game()
 
-        display.fill(white)
-        message(310, 250, 50, "Reactionery", black)
-        message(355, 290, 30, "The Game", black)
-        time.sleep(3)
-
-        pygame.display.update()
+        # display.fill(white)
+        # message(310, 250, 50, "Reactionery", black)
+        # message(355, 290, 30, "The Game", black)
+        # time.sleep(3)
+        #
+        # pygame.display.update()
 
         display.fill(white)
         message(150, 240, 40, "Click on colored boxes. SPACE to restart", black)
@@ -144,26 +144,30 @@ def intro_timer():
 def timer():
 
     global game_over
-
     global time_left
 
     while not game_over:
 
+        # Clear old time
+        draw_object(display, white, 696, 8, 60, 30)
+
         print(time_left)
-        time_left -= 1
-        time.sleep(1)
+        time_left -= 0.01
+        time.sleep(0.01)
 
         if time_left < 0:
             game_over = True
 
 
 def start_thread(method):
+
     timer_thread = threading.Thread(target=method)
     timer_thread.daemon = True  # Stop thread if exiting out of program
     timer_thread.start()
 
 
 def draw_object(screen, color, object_x, object_y, object_width, object_height):
+
     pygame.draw.rect(screen, color, [object_x, object_y, object_width, object_height])
 
 
@@ -277,7 +281,7 @@ def game_loop():
                 # Clicked on object
                 if (object_maximum_x >= mouse_x >= object_x) and (object_maximum_y >= mouse_y >= object_y):
 
-                    # Deacrease object size
+                    # Decrease object size
                     if object_height_minimum > 40:
 
                         object_width_maximum -= 2
@@ -295,7 +299,7 @@ def game_loop():
 
                     score += 1
 
-                    added_time = added_time * 0.85
+                    added_time = added_time * 0.9
 
                     time_left += added_time
 
@@ -304,7 +308,7 @@ def game_loop():
                     if score % 20 == 0:
                         time_left += 5
 
-                    elif score % 50 == 0:
+                    elif score % 100 == 0:
                         time_left += 5
 
                     pygame.display.update()
@@ -317,16 +321,17 @@ def game_loop():
         draw_object(display, object_color, object_x, object_y, object_width, object_height)
 
         # Display time left & score
-        # TODO: Nemt array un mēģināt ar to pildīt ar sekundēm un dzēst
+        # TODO: Kaut kā vajaga redraw visu laiku
         message(600, 10, 30, "Time left: {:.2f}".format(time_left), black)
         message(600, 40, 30, "Score: {}".format(score), black)
 
         pygame.display.update()
 
-        clock.tick(300)
+        clock.tick(500)
 
     exit_game()
 
 
 game_menu()
 game_loop()
+
